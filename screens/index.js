@@ -1,5 +1,6 @@
 import { View, Image, Text, TextInput, ImageBackground, TouchableOpacity, StyleSheet } from "react-native";
 
+
 index = () => {
     return (
         <View>
