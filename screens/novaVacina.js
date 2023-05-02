@@ -1,4 +1,4 @@
-import { View, Image, Text, TextInput, ImageBackground, TouchableOpacity, Button, InputAccessoryView, StyleSheet, SafeAreaView } from "react-native";
+import { View, Image, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { RadioButton } from 'react-native-paper';
 import DatePicker from 'react-native-date-picker'
 import { useState } from "react";
@@ -37,7 +37,7 @@ const criarConta = () => {
         <View style={style.container}>
             <View style={{ ...style.container.header, alignItems: "center", flexDirection: "row" }}>
                 <Image source={require("../assets/img/Vector.png")} style={{ marginLeft: 13 }} />
-                <Text style={{ color: "#419ED7", fontSize: 34, marginLeft: 15 }}>Nova Conta</Text>
+                <Text style={{ color: "#419ED7", fontSize: 34, marginLeft: 15 }}>Nova Vacina</Text>
             </View>
 
             <View style={{ alignItems: "center", paddingLeft: 10 }}>
