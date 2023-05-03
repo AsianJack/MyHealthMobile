@@ -1,4 +1,4 @@
-import { View, Image, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Image, Text, SafeAreaView, TouchableOpacity, StyleSheet, FlatList } from "react-native";
 
 const items = [
     { id: "1", title: 'BCG', dose: "Dose Única", data: "11/06/2022", img: require("../assets/img/image-comprovante.png"), datarenov: "" },
@@ -13,19 +13,47 @@ const items = [
     { id: "10", title: 'Gripe', dose: "Dose Única", data: "28/07/2023", img: require("../assets/img/image-comprovante.png"), datarenov: "11/10/2022" }
 ];
 
+const lista = (dados) => {
+
+    return (
+        <FlatList
+            data={dados}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+                <SafeAreaView>
+                    {item.dose != "Dose Única" ?
+                        <TouchableOpacity>
+                            <View style={{ backgroundColor: "white", width: 380, borderRadius: 5, paddingLeft: 10, paddingVertical: 5 }}>
+                                <Text style={{ color: "#3F92C5", fontSize: 28 }}>{item.title}</Text>
+                                <Text style={{ color: "#8B8B8B", fontSize: 18 }}>{item.datarenov}</Text>
+                            </View>
+                        </TouchableOpacity> : ""}
+                </SafeAreaView>
+            )}
+            ItemSeparatorComponent={() => <View style={{ height: 10 }}
+
+            />}
+        />
+    )
+}
+
 const proximavacina = () => {
     return (
         <View style={style.container}>
             <View style={{ ...style.container.header, alignItems: "center", flexDirection: "row" }}>
-                <Image source={require("../assets/img/Vector.png")} style={{ marginLeft: 13 }} />
+                <Image source={require("../assets/img/hamburgerIcon.png")} style={{ marginLeft: 13, width: 50, height: 30 }} />
                 <Text style={{ color: "#419ED7", fontSize: 34, marginLeft: 15 }}>Próximas vacinas</Text>
             </View>
-            <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
-                <View style={{backgroundColor:"white", width:"90%", borderRadius:5}}>  
-                    <Text>BCG</Text>
-                </View>
+
+            <View style={{ justifyContent: "space-between", alignItems: "center", marginTop: 30, height: 515 }}>
+                {lista(items)}
             </View>
+
+            <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", alignSelf: "center", top: 55, backgroundColor: "#49B976", borderColor: "#37BD6D", width: 155, height: 40 }}>
+                <Text style={{ fontSize: 18, color: "white" }}>Cadastrar</Text>
+            </TouchableOpacity>
         </View>
+
     )
 }
 const style = StyleSheet.create({

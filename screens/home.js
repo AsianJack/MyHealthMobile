@@ -53,7 +53,7 @@ const home = () => {
     const lista = (dados) => {
 
         return (
-            <ScrollView>
+
                 <FlatList
                     data={dados}
                     keyExtractor={(item) => item.id}
@@ -77,7 +77,7 @@ const home = () => {
                     )}
                     ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
                 />
-            </ScrollView>
+
         )
     }
 
@@ -85,7 +85,7 @@ const home = () => {
     return (
         <View style={style.container}>
             <View style={{ ...style.container.header, alignItems: "center", flexDirection: "row" }}>
-                <Image source={require("../assets/img/Vector.png")} style={{ marginLeft: 13 }} />
+                <Image source={require("../assets/img/hamburgerIcon.png")} style={{ marginLeft: 13, width:50, height:30 }} />
                 <Text style={{ color: "#419ED7", fontSize: 34, marginLeft: 15 }}>Minhas vacinas</Text>
             </View>
             <View style={{ flexDirection: "row", justifyContent: "center", top: 30, height: 30, zIndex: 999 }}>
