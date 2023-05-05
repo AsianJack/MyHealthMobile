@@ -3,7 +3,7 @@
  */
 
 import {AppRegistry} from 'react-native';
-import index from './screens/recuperarSenha.js';
+import navigation from './screens/navigation.js';
 import {name as appName} from './app.json';
 
-AppRegistry.registerComponent(appName, () => index);
+AppRegistry.registerComponent(appName, () => navigation);

@@ -1,7 +1,7 @@
 import { View, Image, Text, TextInput, ImageBackground, TouchableOpacity, StyleSheet } from "react-native";
 
 
-index = () => {
+const Index = (props) => {
     return (
         <View>
             <ImageBackground source={require('../assets/img/inicial.png')} imageStyle={{ opacity: 0.2 }}>
@@ -26,18 +26,18 @@ index = () => {
                             </View>
 
                             <Text style={{ color: "#FD7979", marginLeft: 54 }}>E-mail e/ou senha inválidos.</Text>
-                            <TouchableOpacity style={styles.container.btentrar}>
+                            <TouchableOpacity style={styles.container.btentrar} onPress={()=>props.navigation.push('DrawerPrincipal')}>
                                 <Text style={{ color: "white", fontSize: 18 }}>Entrar</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
                     <View>
-                        <TouchableOpacity style={{ ...styles.container.btcriar, alignSelf:"center" }}>
+                        <TouchableOpacity style={{ ...styles.container.btcriar, alignSelf:"center" }} onPress={()=>props.navigation.push('Criarconta')}>
                             <Text style={{ color: "white", alignSelf: "center" }}>Criar minha conta</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={{ flex: 0.4, marginTop:60, alignSelf:"center" }}>
-                        <TouchableOpacity style={{...styles.container.btesqueci}}>
+                        <TouchableOpacity style={{...styles.container.btesqueci}} onPress={()=>props.navigation.push('Recuperarsenha')}>
                             <Text style={{ color: "white" }}>Esqueci minha senha</Text>
                         </TouchableOpacity>
                     </View>
@@ -84,4 +84,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default index;
+export default Index;

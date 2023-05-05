@@ -6,7 +6,7 @@ import ImagePicker from 'react-native-image-picker';
 import { launchImageLibrary } from 'react-native-image-picker';
 
 
-const editarVacina = () => {
+const EditarVacina = (props) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [value, setValue] = useState('');
     const [date, setDate] = useState(new Date())
@@ -124,7 +124,7 @@ const editarVacina = () => {
                     />
                 </View>
             </View>
-            <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", alignSelf: "center", top: 50, backgroundColor: "#49B976", borderColor: "#37BD6D", width: 155, height: 40 }}>
+            <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", alignSelf: "center", top: 50, backgroundColor: "#49B976", borderColor: "#37BD6D", width: 155, height: 40 }} onPress={()=>props.navigation.pop()}>
                 <Text style={{ fontSize: 18, color: "white" }}>Cadastrar</Text>
             </TouchableOpacity>
             <TouchableOpacity style={{ flexDirection: "row", justifyContent: "center", alignItems: "center", alignSelf: "center", top: 150, backgroundColor: "#FD7979", borderColor: "#37BD6D", width: 105, height: 30 }} onPress={() => setModalVisible(true)}>
@@ -144,7 +144,7 @@ const editarVacina = () => {
                     <View style={{ backgroundColor: "white", justifyContent: "center", alignItems: "center", height: 150, width: 350, alignSelf: "center", top: 250, borderColor: "#B9DFDB", borderWidth: 2 }}>
                         <Text style={{marginBottom:10, fontSize:18, color:"#FD7979"}}>Tem certeza que deseja{'\n'}  remover essa vacina?</Text>
                         <View style={{ flexDirection: "row", justifyContent: "space-between", gap: 10, marginTop:10 }}>
-                            <TouchableOpacity style={{ backgroundColor: "#FF8383", width:140, height:45, justifyContent:"center" }}>
+                            <TouchableOpacity style={{ backgroundColor: "#FF8383", width:140, height:45, justifyContent:"center" }} onPress={()=>props.navigation.pop()}>
                                 <Text style={{textAlign:"center"}}>Sim</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={{ backgroundColor: "#3F92C5", width:140, height:45, justifyContent:"center" }} onPress={() => setModalVisible(false)}>
@@ -170,4 +170,4 @@ const style = StyleSheet.create({
         },
     }
 });
-export default editarVacina;
+export default EditarVacina;

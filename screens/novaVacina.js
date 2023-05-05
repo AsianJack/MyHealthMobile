@@ -6,7 +6,7 @@ import ImagePicker from 'react-native-image-picker';
 import { launchImageLibrary } from 'react-native-image-picker';
 
 
-const criarConta = () => {
+const NovaVacina = (props) => {
     const [value, setValue] = useState('');
     const [date, setDate] = useState(new Date())
     const [open, setOpen] = useState(false)
@@ -122,7 +122,7 @@ const criarConta = () => {
                     />
                 </View>
             </View>
-            <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", alignSelf: "center", top: 150, backgroundColor: "#49B976", borderColor: "#37BD6D", width: 155, height: 40 }}>
+            <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", alignSelf: "center", top: 150, backgroundColor: "#49B976", borderColor: "#37BD6D", width: 155, height: 40 }} onPress={()=>props.navigation.pop()}>
                 <Text style={{ fontSize: 18, color: "white" }}>Cadastrar</Text>
             </TouchableOpacity>
         </View>
@@ -140,4 +140,4 @@ const style = StyleSheet.create({
         },
     }
 });
-export default criarConta;
+export default NovaVacina;

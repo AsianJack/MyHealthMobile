@@ -1,7 +1,6 @@
 import { View, Image, Text, TouchableOpacity, StyleSheet, TextInput } from "react-native";
-import { white } from "react-native-paper/lib/typescript/src/styles/themes/v2/colors";
 
-const recuperarSenha =()=>{
+const RecuperarSenha =(props)=>{
     return(
         <View style={style.container}>
             <View style={{ ...style.container.header, alignItems: "center", flexDirection: "row" }}>
@@ -12,7 +11,7 @@ const recuperarSenha =()=>{
                 <Text style={{marginRight:7, color:"white"}}>E-mail</Text>
                 <TextInput style={{ backgroundColor: "white", height: 30, fontSize: 14, padding: 5, width: 250, color: "#3F92C5" }} defaultValue="Jurandir.pereira@hotmail.com"></TextInput>
             </View>
-            <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", alignSelf: "center", top: 450, backgroundColor: "#49B976", borderColor: "#37BD6D", width: 150, height: 30 }}>
+            <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", alignSelf: "center", top: 450, backgroundColor: "#49B976", borderColor: "#37BD6D", width: 150, height: 30 }} onPress={()=>props.navigation.pop()}>
                 <Text style={{color:"white", fontSize:16}}>Recuperar senha</Text>
             </TouchableOpacity>
         </View>
@@ -30,4 +29,4 @@ const style = StyleSheet.create({
         },
     }
 });
-export default recuperarSenha;
+export default RecuperarSenha;

@@ -1,6 +1,6 @@
 import { View, Image, Text, TextInput, ScrollView, TouchableOpacity, StyleSheet, FlatList, SafeAreaView } from "react-native";
 import { useState } from "react";
-const home = () => {
+const Home = (props) => {
     const [valor, setValue] = useState('');
     const handleTextChange = (text) => {
         setValue(text);
@@ -54,29 +54,28 @@ const home = () => {
 
         return (
 
-                <FlatList
-                    data={dados}
-                    keyExtractor={(item) => item.id}
-                    numColumns={2}
-                    columnWrapperStyle={{ justifyContent: 'space-between' }}
-                    renderItem={({ item }) => (
-                        <SafeAreaView>
-                            <TouchableOpacity>
-                                <View style={{ ...style.container.box }}>
-                                    <Text style={{ color: "#3F92C5", fontSize: 24 }}>{item.title}</Text>
-                                    <Text style={{ backgroundColor: "#3F92C5", color: "white", fontSize: 12, width: 70, textAlign: "center", marginBottom: 5 }}>{item.dose}</Text>
-                                    <Text style={{ color: "#8B8B8B", fontSize: 10, marginBottom: 5 }}>{item.data}</Text>
-                                    <Image source={item.img} style={{ width: 160, height: 80 }} />
-                                    {item.datarenov != "" ? <Text style={{ color: "#FD7979", fontSize: 11, alignSelf: "flex-end", marginRight: 10 }}>Próxima Dose em: {item.datarenov}</Text> : <Text style={{ color: "#FD7979", fontSize: 11, alignSelf: "flex-end", marginRight: 10 }}>Não há próxima dose</Text>}
+            <FlatList
+                data={dados}
+                keyExtractor={(item) => item.id}
+                numColumns={2}
+                columnWrapperStyle={{ justifyContent: 'space-between' }}
+                renderItem={({ item }) => (
+                    <SafeAreaView>
+                        <TouchableOpacity onPress={() => props.navigation.push('Editarvacina')}>
+                            <View style={{ ...style.container.box }}>
+                                <Text style={{ color: "#3F92C5", fontSize: 24 }}>{item.title}</Text>
+                                <Text style={{ backgroundColor: "#3F92C5", color: "white", fontSize: 12, width: 70, textAlign: "center", marginBottom: 5 }}>{item.dose}</Text>
+                                <Text style={{ color: "#8B8B8B", fontSize: 10, marginBottom: 5 }}>{item.data}</Text>
+                                <Image source={item.img} style={{ width: 160, height: 80 }} />
+                                {item.datarenov != "" ? <Text style={{ color: "#FD7979", fontSize: 11, alignSelf: "flex-end", marginRight: 10 }}>Próxima Dose em: {item.datarenov}</Text> : <Text style={{ color: "#FD7979", fontSize: 11, alignSelf: "flex-end", marginRight: 10 }}>Não há próxima dose</Text>}
+                            </View>
+                        </TouchableOpacity>
+                    </SafeAreaView>
 
-                                </View>
-                            </TouchableOpacity>
-                        </SafeAreaView>
 
-
-                    )}
-                    ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
-                />
+                )}
+                ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
+            />
 
         )
     }
@@ -85,7 +84,10 @@ const home = () => {
     return (
         <View style={style.container}>
             <View style={{ ...style.container.header, alignItems: "center", flexDirection: "row" }}>
-                <Image source={require("../assets/img/hamburgerIcon.png")} style={{ marginLeft: 13, width:50, height:30 }} />
+                <TouchableOpacity onPress={()=>props.navigation.openDrawer()}>
+                    <Image source={require("../assets/img/hamburgerIcon.png")} style={{ marginLeft: 13, width: 50, height: 30 }} />
+                </TouchableOpacity>
+
                 <Text style={{ color: "#419ED7", fontSize: 34, marginLeft: 15 }}>Minhas vacinas</Text>
             </View>
             <View style={{ flexDirection: "row", justifyContent: "center", top: 30, height: 30, zIndex: 999 }}>
@@ -98,7 +100,7 @@ const home = () => {
                 </View>
             </SafeAreaView>
             <View style={{ top: 130, alignItems: "center" }}>
-                <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", alignSelf: "center", backgroundColor: "#49B976", borderColor: "#37BD6D", width: 155, height: 40 }}>
+                <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", alignSelf: "center", backgroundColor: "#49B976", borderColor: "#37BD6D", width: 155, height: 40 }} onPress={() => props.navigation.push('Novavacina')}>
                     <Text style={{ fontSize: 18, color: "white" }}>Nova vacina</Text>
                 </TouchableOpacity>
             </View>
@@ -136,4 +138,4 @@ const style = StyleSheet.create({
         }
     }
 });
-export default home;
+export default Home;

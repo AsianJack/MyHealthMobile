@@ -37,11 +37,13 @@ const lista = (dados) => {
     )
 }
 
-const proximavacina = () => {
+const Proximavacina = (props) => {
     return (
         <View style={style.container}>
             <View style={{ ...style.container.header, alignItems: "center", flexDirection: "row" }}>
-                <Image source={require("../assets/img/hamburgerIcon.png")} style={{ marginLeft: 13, width: 50, height: 30 }} />
+                <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
+                    <Image source={require("../assets/img/hamburgerIcon.png")} style={{ marginLeft: 13, width: 50, height: 30 }} />
+                </TouchableOpacity> 
                 <Text style={{ color: "#419ED7", fontSize: 34, marginLeft: 15 }}>Próximas vacinas</Text>
             </View>
 
@@ -49,7 +51,7 @@ const proximavacina = () => {
                 {lista(items)}
             </View>
 
-            <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", alignSelf: "center", top: 55, backgroundColor: "#49B976", borderColor: "#37BD6D", width: 155, height: 40 }}>
+            <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", alignSelf: "center", top: 30, backgroundColor: "#49B976", borderColor: "#37BD6D", width: 155, height: 40 }} onPress={() => props.navigation.push('Novavacina')}>
                 <Text style={{ fontSize: 18, color: "white" }}>Cadastrar</Text>
             </TouchableOpacity>
         </View>
@@ -69,4 +71,4 @@ const style = StyleSheet.create({
     }
 });
 
-export default proximavacina;
+export default Proximavacina;
