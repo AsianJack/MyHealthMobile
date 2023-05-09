@@ -63,9 +63,9 @@ const Home = (props) => {
                     <SafeAreaView>
                         <TouchableOpacity onPress={() => props.navigation.push('Editarvacina')}>
                             <View style={{ ...style.container.box }}>
-                                <Text style={{ color: "#3F92C5", fontSize: 24 }}>{item.title}</Text>
-                                <Text style={{ backgroundColor: "#3F92C5", color: "white", fontSize: 12, width: 70, textAlign: "center", marginBottom: 5 }}>{item.dose}</Text>
-                                <Text style={{ color: "#8B8B8B", fontSize: 10, marginBottom: 5 }}>{item.data}</Text>
+                                <Text style={{ color: "#3F92C5", fontSize: 24, fontFamily:"AveriaLibre-Regular" }}>{item.title}</Text>
+                                <Text style={{ backgroundColor: "#3F92C5", color: "white", fontFamily:"AveriaLibre-Regular", fontSize: 12, width: 70, textAlign: "center", marginBottom: 5 }}>{item.dose}</Text>
+                                <Text style={{ color: "#8B8B8B", fontSize: 10, marginBottom: 5, fontFamily:"AveriaLibre-Regular" }}>{item.data}</Text>
                                 <Image source={item.img} style={{ width: 160, height: 80 }} />
                                 {item.datarenov != "" ? <Text style={{ color: "#FD7979", fontSize: 11, alignSelf: "flex-end", marginRight: 10 }}>Próxima Dose em: {item.datarenov}</Text> : <Text style={{ color: "#FD7979", fontSize: 11, alignSelf: "flex-end", marginRight: 10 }}>Não há próxima dose</Text>}
                             </View>
@@ -88,10 +88,10 @@ const Home = (props) => {
                     <Image source={require("../assets/img/hamburgerIcon.png")} style={{ marginLeft: 13, width: 50, height: 30 }} />
                 </TouchableOpacity>
 
-                <Text style={{ color: "#419ED7", fontSize: 34, marginLeft: 15 }}>Minhas vacinas</Text>
+                <Text style={{ color: "#419ED7", fontSize: 34, marginLeft: 15, fontFamily:"AveriaLibre-Regular" }}>Minhas vacinas</Text>
             </View>
             <View style={{ flexDirection: "row", justifyContent: "center", top: 30, height: 30, zIndex: 999 }}>
-                <TextInput style={{ ...style.container.inputpequisar }} placeholder="PESQUISAR VACINA..." value={valor} onChangeText={handleTextChange}></TextInput>
+                <TextInput style={{ ...style.container.inputpequisar, fontFamily:"AveriaLibre-Regular" }} placeholder="PESQUISAR VACINA..." value={valor} onChangeText={handleTextChange}></TextInput>
                 <Image source={require("../assets/img/iconpesquisa.png")} style={{ position: "absolute", left: 15, marginTop: 4, height: 20, width: 20 }} />
             </View>
             <SafeAreaView>
@@ -101,7 +101,7 @@ const Home = (props) => {
             </SafeAreaView>
             <View style={{ top: 130, alignItems: "center" }}>
                 <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", alignSelf: "center", backgroundColor: "#49B976", borderColor: "#37BD6D", width: 155, height: 40 }} onPress={() => props.navigation.push('Novavacina')}>
-                    <Text style={{ fontSize: 18, color: "white" }}>Nova vacina</Text>
+                    <Text style={{ fontSize: 18, color: "white", fontFamily:"AveriaLibre-Regular" }}>Nova vacina</Text>
                 </TouchableOpacity>
             </View>
 

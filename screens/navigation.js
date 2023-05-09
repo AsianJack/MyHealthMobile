@@ -3,7 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Index from "./index.js";
 import EditarVacina from "./Editarvacinas.js";
 import NovaVacina from "./novaVacina.js";
-import CriarConta from "./Criarconta.js";
+import CriarConta from "./criarConta.js";
 import RecuperarSenha from "./recuperarSenha.js";
 import DrawerPrincipal from "./component/drawerPrincipal.js";
 
