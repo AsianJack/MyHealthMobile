@@ -1,17 +1,6 @@
 import { View, Image, Text, SafeAreaView, TouchableOpacity, StyleSheet, FlatList } from "react-native";
-
-const items = [
-    { id: "1", title: 'BCG', dose: "Dose Única", data: "11/06/2022", img: require("../assets/img/image-comprovante.png"), datarenov: "" },
-    { id: "2", title: 'Influenza', dose: "2ª Dose", data: "01/08/2023", img: require("../assets/img/image-comprovante.png"), datarenov: "11/10/2022" },
-    { id: "3", title: 'Hepatite B', dose: "3ª Dose", data: "05/12/2024", img: require("../assets/img/image-comprovante.png"), datarenov: "11/10/2022" },
-    { id: "4", title: 'HPV', dose: "1ª Dose", data: "22/09/2022", img: require("../assets/img/image-comprovante.png"), datarenov: "11/10/2022" },
-    { id: "5", title: 'Febre Amarela', dose: "Reforço", data: "02/02/2023", img: require("../assets/img/image-comprovante.png"), datarenov: "11/10/2022" },
-    { id: "6", title: 'Tétano', dose: "2ª Dose", data: "21/05/2023", img: require("../assets/img/image-comprovante.png"), datarenov: "11/10/2022" },
-    { id: "7", title: 'Poliomielite', dose: "1ª Dose", data: "03/11/2023", img: require("../assets/img/image-comprovante.png"), datarenov: "11/10/2022" },
-    { id: "8", title: 'Difteria', dose: "2ª Dose", data: "12/07/2023", img: require("../assets/img/image-comprovante.png"), datarenov: "11/10/2022" },
-    { id: "9", title: 'Covid-19', dose: "1ª Dose", data: "15/04/2022", img: require("../assets/img/image-comprovante.png"), datarenov: "11/10/2022" },
-    { id: "10", title: 'Gripe', dose: "Dose Única", data: "28/07/2023", img: require("../assets/img/image-comprovante.png"), datarenov: "11/10/2022" }
-];
+import { listaVacinas } from "./component/DAO";
+import { useIsFocused } from "@react-navigation/native";
 
 const lista = (dados) => {
 
@@ -25,11 +14,12 @@ const lista = (dados) => {
                         <TouchableOpacity>
                             <View style={{ backgroundColor: "white", width: 380, borderRadius: 5, paddingLeft: 10, paddingVertical: 5 }}>
                                 <Text style={{ color: "#3F92C5", fontSize: 28 }}>{item.title}</Text>
-                                <Text style={{ color: "#8B8B8B", fontSize: 18 }}>{item.datarenov}</Text>
+                                <Text style={{ color: "#8B8B8B", fontSize: 18 }}>{item.prox}</Text>
                             </View>
                         </TouchableOpacity> : ""}
                 </SafeAreaView>
             )}
+            extraData={focadin}
             ItemSeparatorComponent={() => <View style={{ height: 10 }}
 
             />}
@@ -38,6 +28,7 @@ const lista = (dados) => {
 }
 
 const Proximavacina = (props) => {
+    focadin = useIsFocused();
     return (
         <View style={style.container}>
             <View style={{ ...style.container.header, alignItems: "center", flexDirection: "row" }}>
@@ -48,10 +39,10 @@ const Proximavacina = (props) => {
             </View>
 
             <View style={{ justifyContent: "space-between", alignItems: "center", marginTop: 30, height: 515 }}>
-                {lista(items)}
+                {lista(listaVacinas)}
             </View>
 
-            <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", alignSelf: "center", top: 30, backgroundColor: "#49B976", borderColor: "#37BD6D", width: 155, height: 40 }} onPress={() => props.navigation.push('Novavacina')}>
+            <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", alignSelf: "center", top: 30, backgroundColor: "#49B976", borderColor: "#37BD6D", width: 155, height: 40 }} onPress={() => props.navigation.push('Novavacina', { data: items[items.length - 1].id })}>
                 <Text style={{ fontSize: 18, color: "white" }}>Cadastrar</Text>
             </TouchableOpacity>
         </View>

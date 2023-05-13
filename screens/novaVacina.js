@@ -4,6 +4,7 @@ import DatePicker from 'react-native-date-picker'
 import { useState } from "react";
 import ImagePicker from 'react-native-image-picker';
 import { launchImageLibrary } from 'react-native-image-picker';
+import { cadastrarVacina } from "./component/DAO";
 
 
 const NovaVacina = (props) => {
@@ -14,7 +15,8 @@ const NovaVacina = (props) => {
     const [imageUri, setImageUri] = useState(null);
     const [openprox, setOpenprox] = useState(false);
     const [prox, setprox] = useState(new Date());
-
+    const [id, setId] = useState(props.route.params?.data ? props.route.params.data++ : 0)
+    const [editavel, setEditavel] = useState(true)
     const formatDate = (date) => {
         const ano = date.getFullYear();
         const mes = (date.getMonth() + 1).toString().padStart(2, '0');
@@ -22,6 +24,16 @@ const NovaVacina = (props) => {
         return `${dia}/${mes}/${ano}`;
     }
 
+    const hadleoff = (valor) => {
+        if (valor != "Dose Única") {
+            setValue(valor)
+            setEditavel(true)
+        }else{
+            setValue(valor)
+            setEditavel(false)
+        }
+
+    }
     const chooseImage = () => {
         const options = {
             mediaType: 'photo',
@@ -37,7 +49,8 @@ const NovaVacina = (props) => {
                 console.log('User tapped custom button: ', response.customButton);
             } else {
                 // You can do something with the selected image uri here
-                setImageUri(response.assets[0].uri);
+                // setImageUri(response.assets[0].uri);
+                setImageUri(require("../assets/img/image-comprovante.png"));
             }
         });
     };
@@ -45,7 +58,7 @@ const NovaVacina = (props) => {
     return (
         <View style={style.container}>
             <View style={{ ...style.container.header, alignItems: "center", flexDirection: "row" }}>
-                <TouchableOpacity onPress={()=>props.navigation.pop()}>
+                <TouchableOpacity onPress={() => props.navigation.pop()}>
                     <Image source={require("../assets/img/Vector.png")} style={{ marginLeft: 13 }} />
                 </TouchableOpacity>
 
@@ -54,15 +67,14 @@ const NovaVacina = (props) => {
 
             <View style={{ alignItems: "center", paddingLeft: 10 }}>
                 <View style={{ flexDirection: "row", marginTop: 90, marginRight: 50 }}>
-                    <Text style={{ marginTop: 5, color: "white", fontFamily: "AveriaLibre-Regular", fontSize: 14, marginRight: 10 }}>Data nascimento</Text>
-                    <TextInput style={{ backgroundColor: "white", fontFamily: "AveriaLibre-Regular", height: 30, fontSize: 14, padding: 5, width: 150, marginRight: 55, color: "#3F92C5" }} defaultValue={formatDate(date)} onPressIn={() => setOpendate(true)} ></TextInput>
-                    <TouchableOpacity style={{ position: "absolute", right: 60, marginTop: 3 }} onPress={() => setOpendate(true)}>
+                    <Text style={{ marginTop: 5, color: "white", fontFamily: "AveriaLibre-Regular", fontSize: 14, marginRight: 10 }}>Data de vacinação</Text>
+                    <TextInput style={{ backgroundColor: "white", fontFamily: "AveriaLibre-Regular", height: 30, fontSize: 14, padding: 5, width: 150, marginRight: 60, color: "#3F92C5" }} defaultValue={formatDate(date)} onPressIn={() => setOpendate(true)} ></TextInput>
+                    <TouchableOpacity style={{ position: "absolute", right: 65, marginTop: 3 }} onPress={() => setOpendate(true)}>
                         <Image source={require("../assets/img/iconcalendar.png")} />
                     </TouchableOpacity>
                     <DatePicker modal title="Confirmar Data" open={opendate} date={date} locale="pt-BR" mode='date' onConfirm={(date) => {
                         setOpendate(false);
                         setDate(date);
-
                     }}
 
                         onCancel={() => {
@@ -80,7 +92,7 @@ const NovaVacina = (props) => {
                 <View style={{ flexDirection: "row", marginTop: 5, flexWrap: "wrap" }}>
                     <Text style={{ marginTop: 5, color: "white", fontFamily: "AveriaLibre-Regular", fontSize: 14, marginRight: 10, marginLeft: 43 }}>Dose</Text>
                     <View style={{ flexDirection: "column" }}>
-                        <RadioButton.Group onValueChange={value => setValue(value)} value={value}  >
+                        <RadioButton.Group onValueChange={value => { hadleoff(value) }} value={value}  >
                             <View style={{ flexDirection: "row" }}>
                                 <View style={{ flexDirection: "row" }}>
                                     <RadioButton value="1a. Dose" color="#419ED7" uncheckedColor="white" backgroundColor="#fff" size={10} width={15} height={15} marginTop={8} justifyContent={"center"} alignItems={"center"} marginLeft={5} />
@@ -118,14 +130,13 @@ const NovaVacina = (props) => {
 
                 <View style={{ flexDirection: "row", marginTop: 10, marginRight: 55 }}>
                     <Text style={{ marginTop: 5, fontFamily: "AveriaLibre-Regular", color: "white", fontSize: 14, marginRight: 13 }}>Próxima vacinação</Text>
-                    <TextInput style={{ backgroundColor: "white", fontFamily: "AveriaLibre-Regular", height: 30, fontSize: 14, padding: 5, width: 150, marginRight: 55, color: "#3F92C5" }} defaultValue={formatDate(prox)} onPressIn={() => setOpenprox(true)} ></TextInput>
-                    <TouchableOpacity style={{ position: "absolute", right: 60, marginTop: 3 }} onPress={() => setOpenprox(true)}>
+                    <TextInput editable={editavel} style={{ backgroundColor: "white", fontFamily: "AveriaLibre-Regular", height: 30, fontSize: 14, padding: 5, width: 150, marginRight: 55, color: "#3F92C5" }} defaultValue={formatDate(prox)} onPressIn={() => setOpenprox(true)} ></TextInput>
+                    <TouchableOpacity style={editavel ? { position: "absolute", right: 60, marginTop: 3 } : { display: "none" }} onPress={() => { setOpenprox(true) }}>
                         <Image source={require("../assets/img/iconcalendar.png")} />
                     </TouchableOpacity>
                     <DatePicker modal title="Confirmar Data" open={openprox} date={date} locale="pt-BR" mode='date' onConfirm={(date) => {
                         setOpenprox(false);
                         setprox(date);
-                        console.log(date.getDate());
                     }}
 
                         onCancel={() => {
@@ -134,7 +145,7 @@ const NovaVacina = (props) => {
                     />
                 </View>
             </View>
-            <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", alignSelf: "center", top: 150, backgroundColor: "#49B976", borderColor: "#37BD6D", width: 155, height: 40 }} onPress={() => props.navigation.pop()}>
+            <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", alignSelf: "center", top: 150, backgroundColor: "#49B976", borderColor: "#37BD6D", width: 155, height: 40 }} onPress={() => {value != "Dose Única" ? cadastrarVacina(vacina, formatDate(date), value, formatDate(prox), props) : cadastrarVacina(vacina, formatDate(date), value, null, props)}}>
                 <Text style={{ fontSize: 18, color: "white", fontFamily: "AveriaLibre-Regular" }}>Cadastrar</Text>
             </TouchableOpacity>
         </View>
